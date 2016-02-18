@@ -43,15 +43,20 @@ public class NewsAdapter extends BaseAdapter {
 		ViewHolder viewHolder = new ViewHolder();
 		if (convertView == null){
 			convertView = mInflater.inflate(R.layout.item_layout, null);
-			viewHolder.tvIcon = (ImageView) convertView.findViewById(R.id.lv_main);
+			viewHolder.tvIcon = (ImageView) convertView.findViewById(R.id.image);
 			viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.title);
 			viewHolder.tvContent = (TextView) convertView.findViewById(R.id.content);
 			convertView.setTag(viewHolder);
 		}else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-//		viewHolder.tvIcon.setImageResource(R.drawable.ic_launcher);
+		viewHolder.tvIcon.setImageResource(R.drawable.ic_launcher);
+		String url = mList.get(arg0).newsIconUrl;
+		viewHolder.tvIcon.setTag(url);
+//		new ImageLoad().showImageByThread(viewHolder.tvIcon, url);
+		new ImageLoad().showImageByAsyncTask(viewHolder.tvIcon, url);
 		viewHolder.tvTitle.setText(mList.get(arg0).newsTitle);
+//		viewHolder.tvTitle.setText(mList.get(arg0).newsIconUrl);
 		viewHolder.tvContent.setText(mList.get(arg0).newsContent);
 		return convertView;
 	}
