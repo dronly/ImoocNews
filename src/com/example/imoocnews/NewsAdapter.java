@@ -14,10 +14,12 @@ public class NewsAdapter extends BaseAdapter {
 
 	private List<NewsBean> mList;
 	private LayoutInflater mInflater;
+	private ImageLoad mImageLoad;
 	
 	public NewsAdapter(Context context, List<NewsBean> mList){
 		this.mList = mList;
 		mInflater = LayoutInflater.from(context);
+		mImageLoad = new ImageLoad();
 	}
 	
 	@Override
@@ -54,7 +56,7 @@ public class NewsAdapter extends BaseAdapter {
 		String url = mList.get(arg0).newsIconUrl;
 		viewHolder.tvIcon.setTag(url);
 //		new ImageLoad().showImageByThread(viewHolder.tvIcon, url);
-		new ImageLoad().showImageByAsyncTask(viewHolder.tvIcon, url);
+		mImageLoad.showImageByAsyncTask(viewHolder.tvIcon, url);
 		viewHolder.tvTitle.setText(mList.get(arg0).newsTitle);
 //		viewHolder.tvTitle.setText(mList.get(arg0).newsIconUrl);
 		viewHolder.tvContent.setText(mList.get(arg0).newsContent);
