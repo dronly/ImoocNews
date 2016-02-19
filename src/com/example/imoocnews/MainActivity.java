@@ -22,17 +22,17 @@ import android.widget.ListView;
 
 public class MainActivity extends Activity {
 
-	private ListView listView;
+	private ListView mListView;
 	private String URL = "http://www.imooc.com/api/teacher?type=4&num=30";
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listView = (ListView) findViewById(R.id.lv_main);
+        mListView = (ListView) findViewById(R.id.lv_main);
         new NewsAsyncTask().execute(URL);
     }
 	
-	class NewsAsyncTask extends AsyncTask<String, Void, List<NewsBean>>{
+	private class NewsAsyncTask extends AsyncTask<String, Void, List<NewsBean>>{
 
 		@Override
 		protected List<NewsBean> doInBackground(String... params) {
@@ -43,8 +43,8 @@ public class MainActivity extends Activity {
 		protected void onPostExecute(List<NewsBean> result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			NewsAdapter adapter = new NewsAdapter(MainActivity.this, result);
-			listView.setAdapter(adapter);
+			NewsAdapter adapter = new NewsAdapter(MainActivity.this, result,mListView);
+			mListView.setAdapter(adapter);
 		}
 		
 	}
